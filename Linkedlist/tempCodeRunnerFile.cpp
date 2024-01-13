@@ -1,0 +1,2 @@
+deleteatend(head);
+    display(head);

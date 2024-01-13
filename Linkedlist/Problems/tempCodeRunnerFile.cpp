@@ -1,0 +1,1 @@
+   // currnode=currnode->next;
