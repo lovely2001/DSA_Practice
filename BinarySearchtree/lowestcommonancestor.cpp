@@ -69,7 +69,7 @@ int main()
     bst1.insert(bst1.root, 6);
     bst1.insert(bst1.root, 2);
     Node *node1 = new Node(2);
-    Node *node2 = new Node(6);
+    Node *node2 = new Node(4);
     Node *lowestanc = lowercommonancestor(bst1.root, node1, node2);
     cout << lowestanc->val;
     return 0;

@@ -1,3 +1,6 @@
+//TC - O(N)
+//SC - O(height of tree)
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -42,21 +45,27 @@ public:
         }
         return root;
     }
+
+    void preordertraversal(Node* root){
+        if(root==NULL){
+            return;
+        }
+
+        cout<<root->val<<" "; 
+        preordertraversal(root->left);
+        preordertraversal(root->right);
+    }
 };
 
-Node *lowercommonancestor(Node *root, Node *node1, Node *node2)
-{
-
-    if ((root->val > node1->val) && (root->val > node2->val))
-    {
-        lowercommonancestor(root->left, node1, node2);
+Node *removeleafnodes(Node* root){
+    if(root==NULL){
+        return NULL;
     }
-    if ((root->val < node1->val) && (root->val < node2->val))
-    {
-        lowercommonancestor(root->right, node1, node2);
+    if(root->left == NULL && root->right == NULL){
+        return NULL;
     }
-
-    // if root value lies between node1 and node2 value or if its value is equal
+    root->left=removeleafnodes(root->left);
+    root->right=removeleafnodes(root->right);
     return root;
 }
 
@@ -68,9 +77,11 @@ int main()
     bst1.insert(bst1.root, 4);
     bst1.insert(bst1.root, 6);
     bst1.insert(bst1.root, 2);
-    Node *node1 = new Node(2);
-    Node *node2 = new Node(6);
-    Node *lowestanc = lowercommonancestor(bst1.root, node1, node2);
-    cout << lowestanc->val;
+    
+    bst1.preordertraversal(bst1.root);
+    cout<<endl;
+    bst1.root = removeleafnodes(bst1.root);
+    bst1.preordertraversal(bst1.root);
+    cout<<endl;
     return 0;
 }
